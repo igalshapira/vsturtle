@@ -23,3 +23,8 @@
 ## setcolor, setpencolor
 
 ## setwidth, setpensize
+
+# Extension Commands
+
+## # Comments
+Any line that starts with a hash symbol (#) is treated as comment and ignored
