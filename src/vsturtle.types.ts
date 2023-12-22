@@ -2,7 +2,7 @@ export type XY = [number, number];
 
 export const x = (pos: XY): number => pos[0];
 export const y = (pos: XY): number => pos[1];
-export const xy = (x: number, y: number): XY => [x,y];
+export const xy = (x: number, y: number): XY => [x, y];
 
 export interface Turtle {
     canvasSize: XY;
@@ -32,4 +32,29 @@ export interface TurtleCommands {
 
     /** Calculate rotation - update heading */
     right: (angle: number, turtle: Turtle) => string | void;
+
+    /** Calculate move - update position */
+    back: (length: number, turtle: Turtle) => string | void;
+
+    /** Set X position of turtle */
+    setx: (x: number, turtle: Turtle) => string | void;
+
+    /** Set Y position of turtle */
+    sety: (y: number, turtle: Turtle) => string | void;
+
+    /** Set X and Y position of turtle */
+    setxy: (x: number, y: number, turtle: Turtle) => string | void;
+
+    /** Clear the screen and go home */
+    clearscreen: (turtle: Turtle) => string | void;
+
+    /** Pen up - moving the turtle will not draw */
+    penup: (turtle: Turtle) => string | void;
+
+    /** Pen up - moving the turtle will  draw */
+    pendown: (turtle: Turtle) => string | void;
+
+    setpencolor: (turtle: Turtle) => string | void;
+
+    setpensize: (size: number, turtle: Turtle) => string | void;
 }

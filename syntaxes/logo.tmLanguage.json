@@ -13,7 +13,7 @@
 		"keywords": {
 			"patterns": [{
 				"name": "keyword.control.logo",
-				"match": "\\b(forward|left|right|fd|lt|rt)\\b"
+				"match": "\\b(forward|fd|left|lt|right|rd|back|bk|home|setx|sety|setxy|setheading|seth|showturtle|st|hideturtle|ht|clean|clearscreen|cs|penup|pu|pendown|pd|setcolor|setpencolor|setwidth|setpensize)\\b"
 			}]
 		},
 		"strings": {

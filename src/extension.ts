@@ -3,6 +3,7 @@
 import * as vscode from "vscode";
 import { Turtle } from "./vsturtle.types";
 import { CanvasTurtle } from "./Canvas";
+import { parseToCanvas } from "./Parser";
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -78,36 +79,11 @@ function getWebviewContent(documentText: string) {
 }
 
 function documentToCanvas(documentText: string): string {
-    const turtle: Turtle = {
-        heading: 0,
-        canvasSize: [400, 400],
-        position: [0, 0],
-        color: "black",
-    };
-    const canvasCenter = [turtle.canvasSize[0] / 2, turtle.canvasSize[1] / 2];
-    // let heading = 0;
-    const commands = documentText.split(/\s/);
-    let commandsText: string = CanvasTurtle.home(turtle) as string;
-
-    for (let i = 0; i < commands.length; i++) {
-        const cmd = commands[i];
-        if (cmd === "forward" || cmd === "fd") {
-            commandsText += CanvasTurtle.forward(parseInt(commands[++i]), turtle);
-        }
-        if (cmd === "left" || cmd === "lt") {
-            CanvasTurtle.left(parseInt(commands[++i]), turtle);
-        }
-        if (cmd === "right" || cmd === "rt") {
-            CanvasTurtle.right(parseInt(commands[++i]), turtle);
-        }
-    }
-
     return `
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 ctx.beginPath();
-ctx.color = "${turtle.color}";
-${commandsText}
+${parseToCanvas(documentText)}
 ctx.stroke();
 `;
 }
