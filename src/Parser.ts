@@ -13,3 +13,7 @@ export function parseToCanvas(text: string): string {
 
     return steps.map((step: Step) => step(turtle)).join("\n");
 }
+
+export function removeComments(text: string): string {
+    return text.replace(/(<#.*?#>)|#.*/g, "$1");
+}

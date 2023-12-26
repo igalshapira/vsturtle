@@ -1,10 +1,12 @@
+import { removeComments } from "./Parser";
 import { Turtle, TurtleCommands } from "./vsturtle.types";
 
 export type Step = (turtle: Turtle) => void | string;
 
 export function parseLogoCode(text: string, turtleCommands: TurtleCommands): Step[] {
     const steps: Step[] = [(turtle: Turtle) => turtleCommands.home(turtle)];
-    const commands = text.split(/\s/);
+    const noComments = removeComments(text);
+    const commands = noComments.split(/\s/);
 
     for (let i = 0; i < commands.length; i++) {
         const cmd = commands[i];

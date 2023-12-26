@@ -1,9 +1,5 @@
 # Change Log
 
-All notable changes to the "vsturtle" extension will be documented in this file.
+## [0.0.2] - 2023-12-25
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
-
-## [Unreleased]
-
-- Initial release
+- Initial release of VS Turtle extension
