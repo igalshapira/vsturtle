@@ -18,6 +18,12 @@ export interface Turtle {
      * @defaultValue false
      */
     penUp?: boolean;
+
+    /**
+     * Is turtle hidden?
+     * @defaultValuje false
+     */
+    hideTurtle?: boolean;
 }
 
 export interface TurtleCommands {
@@ -57,4 +63,8 @@ export interface TurtleCommands {
     setpencolor: (turtle: Turtle) => string | void;
 
     setpensize: (size: number, turtle: Turtle) => string | void;
+
+    showturtle: (turtle: Turtle) => string | void;
+
+    hideturtle: (turtle: Turtle) => string | void;
 }

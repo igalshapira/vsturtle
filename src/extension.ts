@@ -70,7 +70,10 @@ function getWebviewContent(documentText: string) {
 	  </style>
   </head>
   <body>
-  <canvas id="canvas" width=400 height=400></canvas>
+  <div style="position: relative">
+    <div id="turtle" style="position: absolute; font-size: 30px;">🐢</div>
+  	<canvas id="canvas" width=400 height=400></canvas>
+   </div>
   <script type="text/javascript">
   ${documentToCanvas(documentText)}
   </script>
@@ -79,11 +82,23 @@ function getWebviewContent(documentText: string) {
 }
 
 function documentToCanvas(documentText: string): string {
+	const turtle: Turtle = {
+		heading: 0,
+		canvasSize: [400, 400],
+		position: [0, 0],
+		color: "black",
+	};
     return `
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 ctx.beginPath();
-${parseToCanvas(documentText)}
+${parseToCanvas(turtle, documentText)}
 ctx.stroke();
+
+const turtle = document.getElementById("turtle");
+turtle.style.left = "${turtle.position[0]}px";
+turtle.style.top = "${turtle.position[1]}px";
+turtle.style.transform = "rotate(${turtle.heading+90}deg)";
+turtle.style.display = "${turtle.hideTurtle ? "none" : "block"}";
 `;
 }

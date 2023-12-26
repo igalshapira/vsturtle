@@ -33,10 +33,10 @@ export const CanvasTurtle: TurtleCommands = {
         turtle.position = xy(x, y(turtle.position));
     },
     sety: function (y: number, turtle: Turtle): string | void {
-        turtle.position = xy(x(turtle.position),y);
+        turtle.position = xy(x(turtle.position), y);
     },
     setxy: function (x: number, y: number, turtle: Turtle): string | void {
-        turtle.position = xy(x,y);
+        turtle.position = xy(x, y);
     },
     clearscreen: function (_turtle: Turtle): string | void {
         throw new Error("Function not implemented.");
@@ -53,4 +53,10 @@ export const CanvasTurtle: TurtleCommands = {
     setpensize: function (_size: number, _turtle: Turtle): string | void {
         throw new Error("Function not implemented.");
     },
+    showturtle: function (turtle: Turtle): string | void {
+        turtle.hideTurtle = false;
+    },
+    hideturtle: function (turtle: Turtle): string | void {
+        turtle.hideTurtle = true;
+    }
 };

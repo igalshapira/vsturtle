@@ -18,6 +18,9 @@ VsTurtle is a simple extension for VS Code to write Logo Turtle commands.
 | pendown | pd| Pen down - turtle will draw when moving
 | setcolor, setpencolor
 | setwidth, setpensize
+| showturtle | st |
+| hideturtle | ht |
+
 
 # Extension Commands
 Some additional commands are supported which are not part of the original Logo turtle language
