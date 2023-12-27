@@ -59,7 +59,6 @@
         "watch": "tsc -watch -p ./",
         "pretest": "pnpm run compile && pnpm run lint",
         "lint": "eslint src --ext ts",
-        "deploy": "vsce publish --yarn",
         "test": "vscode-test"
     },
     "devDependencies": {
