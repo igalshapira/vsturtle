@@ -60,7 +60,7 @@ export interface TurtleCommands {
     /** Pen up - moving the turtle will  draw */
     pendown: (turtle: Turtle) => string | void;
 
-    setpencolor: (turtle: Turtle) => string | void;
+    setpencolor: (color: string, turtle: Turtle) => string | void;
 
     setpensize: (size: number, turtle: Turtle) => string | void;
 

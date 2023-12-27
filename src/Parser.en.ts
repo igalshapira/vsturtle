@@ -2,10 +2,11 @@ import { removeComments } from "./Parser";
 import { Turtle, TurtleCommands } from "./vsturtle.types";
 
 export type Step = (turtle: Turtle) => void | string;
+export type ParameterType = "number" | "string";
 
 type Command = {
-    /** How many paramters are required for this command */
-    params?: number;
+    /** Types of parameters - string or number */
+    params?: ParameterType[];
 
     /* Optional short name of command */
     alias?: string;
@@ -13,25 +14,25 @@ type Command = {
 
 const commands: Record<string, Command> = {
     forward: {
-        params: 1,
+        params: ["number"],
     },
     fw: {
         alias: "forward",
     },
     back: {
-        params: 1,
+        params: ["number"],
     },
     bk: {
         alias: "back",
     },
     left: {
-        params: 1,
+        params: ["number"],
     },
     lt: {
         alias: "left",
     },
     right: {
-        params: 1,
+        params: ["number"],
     },
     rt: {
         alias: "right",
@@ -53,18 +54,30 @@ const commands: Record<string, Command> = {
         alias: "clean",
     },
     setx: {
-        params: 1,
+        params: ["number"],
     },
     sety: {
-        params: 1,
+        params: ["number"],
     },
     setxy: {
-        params: 2,
+        params: ["number", "number"],
     },
     showturtle: {},
     st: { alias: "showturtle" },
     hideturtle: {},
     ht: { alias: "hideturtle" },
+    setpencolor: {
+        params: ["string"],
+    },
+    setcolor: {
+        alias: "setpencolor",
+    },
+    setpensize: {
+        params: ["number"]
+    },
+    setwidth: {
+        alias: "setpensize",
+    }
 };
 
 export function parseLogoCode(text: string, turtleCommands: TurtleCommands): Step[] {
@@ -78,34 +91,20 @@ export function parseLogoCode(text: string, turtleCommands: TurtleCommands): Ste
             cmd = commands[cmd].alias ?? cmd;
         }
         if (commands[cmd]) {
-            switch (commands[cmd].params ?? 0) {
+            switch ((commands[cmd].params ?? []).length) {
                 case 0:
                     steps.push((turtle: Turtle) => (turtleCommands as any)[cmd](turtle));
                     break;
                 case 1:
-                    steps.push((turtle: Turtle) => (turtleCommands as any)[cmd](parseInt(words[++i]), turtle));
+                    if (commands[cmd].params?.[0] === "number") {
+                        steps.push((turtle: Turtle) => (turtleCommands as any)[cmd](parseInt(words[++i]), turtle));
+                    }
+                    else {
+                        steps.push((turtle: Turtle) => (turtleCommands as any)[cmd](words[++i], turtle));
+                    }
                     break;
             }
         }
-        // if (cmd === "forward" || cmd === "fd") {
-        //     steps.push((turtle: Turtle) => turtleCommands.forward(parseInt(words[++i]), turtle));
-        // } else if (cmd === "left" || cmd === "lt") {
-        //     steps.push((turtle: Turtle) => turtleCommands.left(parseInt(words[++i]), turtle));
-        // } else if (cmd === "right" || cmd === "rt") {
-        //     steps.push((turtle: Turtle) => turtleCommands.right(parseInt(words[++i]), turtle));
-        // } else if (cmd === "back" || cmd === "bk") {
-        //     steps.push((turtle: Turtle) => turtleCommands.back(parseInt(words[++i]), turtle));
-        // } else if (cmd === "penup" || cmd === "pu") {
-        //     steps.push((turtle: Turtle) => turtleCommands.penup(turtle));
-        // } else if (cmd === "pendown" || cmd === "pd") {
-        //     steps.push((turtle: Turtle) => turtleCommands.pendown(turtle));
-        // }
-        // setx, sety, setxy | |  Set turtle position
-        // | clean, clearscreen | cs| Clear screen and return to home
-        // | penup | pu| Pen up - turtle will not draw when moving
-        // | pendown | pd| Pen down - turtle will draw when moving
-        // | setcolor, setpencolor
-        // | setwidth, setpensize
     }
 
     return steps;

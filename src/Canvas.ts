@@ -1,3 +1,4 @@
+import { getColor } from "./Parser";
 import { Turtle, TurtleCommands, x, xy, y } from "./vsturtle.types";
 
 const forward = (length: number, turtle: Turtle): string => {
@@ -47,11 +48,18 @@ export const CanvasTurtle: TurtleCommands = {
     pendown: function (turtle: Turtle): string | void {
         turtle.penUp = false;
     },
-    setpencolor: function (_turtle: Turtle): string | void {
-        throw new Error("Function not implemented.");
+    setpencolor: function (color: string, turtle: Turtle): string | void {
+        turtle.color = getColor(color);
+        return `ctx.stroke();
+ctx.beginPath();
+ctx.moveTo(${x(turtle.position)}, ${y(turtle.position)});
+ctx.strokeStyle = "${turtle.color}";`;
     },
-    setpensize: function (_size: number, _turtle: Turtle): string | void {
-        throw new Error("Function not implemented.");
+    setpensize: function (size: number, turtle: Turtle): string | void {
+        return `ctx.stroke();
+ctx.beginPath();
+ctx.moveTo(${x(turtle.position)}, ${y(turtle.position)});
+ctx.lineWidth = ${size};`;
     },
     showturtle: function (turtle: Turtle): string | void {
         turtle.hideTurtle = false;
