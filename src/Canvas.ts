@@ -1,15 +1,18 @@
 import { getColor } from "./Parser";
 import { Turtle, TurtleCommands, x, xy, y } from "./vsturtle.types";
 
-const forward = (length: number, turtle: Turtle): string => {
-    const newX = x(turtle.position) + Math.sin((turtle.heading / 180) * Math.PI) * length;
-    const newY = y(turtle.position) - Math.cos((turtle.heading / 180) * Math.PI) * length;
-
+const moveTo = (newX: number, newY: number, turtle: Turtle): string => {
     turtle.position = xy(newX, newY);
     if (turtle.penUp) {
         return `ctx.moveTo(${x(turtle.position)}, ${y(turtle.position)});`;
     }
     return `ctx.lineTo(${x(turtle.position)}, ${y(turtle.position)});`;
+};
+
+const forward = (length: number, turtle: Turtle): string => {
+    const newX = x(turtle.position) + Math.sin((turtle.heading / 180) * Math.PI) * length;
+    const newY = y(turtle.position) - Math.cos((turtle.heading / 180) * Math.PI) * length;
+    return moveTo(newX, newY, turtle);
 };
 
 /** Implements a turtle and sends back ctx 2d drawing commands */
@@ -30,14 +33,14 @@ export const CanvasTurtle: TurtleCommands = {
     back: function (length: number, turtle: Turtle): string | void {
         return forward(-1 * length, turtle);
     },
-    setx: function (x: number, turtle: Turtle): string | void {
-        turtle.position = xy(x, y(turtle.position));
+    setx: function (newX: number, turtle: Turtle): string | void {
+        return moveTo(newX + x(turtle.canvasSize) / 2, y(turtle.position), turtle);
     },
-    sety: function (y: number, turtle: Turtle): string | void {
-        turtle.position = xy(x(turtle.position), y);
+    sety: function (newY: number, turtle: Turtle): string | void {
+        return moveTo(x(turtle.position), -newY + y(turtle.canvasSize) / 2, turtle);
     },
-    setxy: function (x: number, y: number, turtle: Turtle): string | void {
-        turtle.position = xy(x, y);
+    setxy: function (newX: number, newY: number, turtle: Turtle): string | void {
+        return moveTo(newX + x(turtle.canvasSize) / 2, -newY + y(turtle.canvasSize) / 2, turtle);
     },
     clearscreen: function (_turtle: Turtle): string | void {
         throw new Error("Function not implemented.");
@@ -66,5 +69,5 @@ ctx.lineWidth = ${size};`;
     },
     hideturtle: function (turtle: Turtle): string | void {
         turtle.hideTurtle = true;
-    }
+    },
 };
