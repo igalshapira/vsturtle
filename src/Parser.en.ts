@@ -16,7 +16,7 @@ const commands: Record<string, Command> = {
     forward: {
         params: ["number"],
     },
-    fw: {
+    fd: {
         alias: "forward",
     },
     back: {
