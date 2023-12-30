@@ -28,7 +28,7 @@ export const CanvasTurtle: TurtleCommands = {
         turtle.heading = (turtle.heading + angle) % 360;
     },
     back: function (length: number, turtle: Turtle): string | void {
-        forward(-1 * length, turtle);
+        return forward(-1 * length, turtle);
     },
     setx: function (x: number, turtle: Turtle): string | void {
         turtle.position = xy(x, y(turtle.position));
