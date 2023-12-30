@@ -73,17 +73,17 @@ const commands: Record<string, Command> = {
         alias: "setpencolor",
     },
     setpensize: {
-        params: ["number"]
+        params: ["number"],
     },
     setwidth: {
         alias: "setpensize",
-    }
+    },
 };
 
 export function parseLogoCode(text: string, turtleCommands: TurtleCommands): Step[] {
     const steps: Step[] = [(turtle: Turtle) => turtleCommands.home(turtle)];
     const noComments = removeComments(text);
-    const words = noComments.split(/\s/);
+    const words = noComments.split(/\s/).filter(s => s.length > 0);
 
     for (let i = 0; i < words.length; i++) {
         let cmd = words[i];
@@ -96,10 +96,13 @@ export function parseLogoCode(text: string, turtleCommands: TurtleCommands): Ste
                     steps.push((turtle: Turtle) => (turtleCommands as any)[cmd](turtle));
                     break;
                 case 1:
+                    if (i + 1 >= words.length) {
+                        // TODO: Issue some warning or tip to the user. maybe an example for the command?
+                        break;
+                    }
                     if (commands[cmd].params?.[0] === "number") {
                         steps.push((turtle: Turtle) => (turtleCommands as any)[cmd](parseInt(words[++i]), turtle));
-                    }
-                    else {
+                    } else {
                         steps.push((turtle: Turtle) => (turtleCommands as any)[cmd](words[++i], turtle));
                     }
                     break;
