@@ -71,7 +71,7 @@ function getWebviewContent(documentText: string) {
   </head>
   <body>
   <div style="position: relative">
-    <div id="turtle" style="position: absolute; font-size: 30px;">🐢</div>
+    <div id="turtle" style="position: absolute; font-size: 30px; line-height: 30px; width: 30px;">🐢</div>
   	<canvas id="canvas" width=400 height=400></canvas>
    </div>
   <script type="text/javascript">
@@ -96,8 +96,8 @@ ${parseToCanvas(turtle, documentText)}
 ctx.stroke();
 
 const turtle = document.getElementById("turtle");
-turtle.style.left = "${turtle.position[0]}px";
-turtle.style.top = "${turtle.position[1]}px";
+turtle.style.left = "${turtle.position[0] - 15}px";
+turtle.style.top = "${turtle.position[1] - 15}px";
 turtle.style.transform = "rotate(${turtle.heading+90}deg)";
 turtle.style.display = "${turtle.hideTurtle ? "none" : "block"}";
 `;
