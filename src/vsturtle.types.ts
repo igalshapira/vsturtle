@@ -14,6 +14,11 @@ export interface Turtle {
 
     color: string;
 
+    /** Size of pen
+     * @defaultValue 1
+      */
+    penSize?: number;
+
     /** Is the pen currently up
      * @defaultValue false
      */
@@ -67,4 +72,6 @@ export interface TurtleCommands {
     showturtle: (turtle: Turtle) => string | void;
 
     hideturtle: (turtle: Turtle) => string | void;
+
+    circle: (size: number, turtle: Turtle) => string | void;
 }

@@ -78,6 +78,9 @@ const commands: Record<string, Command> = {
     setwidth: {
         alias: "setpensize",
     },
+    circle: {
+        params: ["number"],
+    },
 };
 
 export function parseLogoCode(text: string, turtleCommands: TurtleCommands): Step[] {

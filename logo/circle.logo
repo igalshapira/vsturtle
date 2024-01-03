@@ -1,0 +1,18 @@
+; Draw 4 circles with same center
+setcolor yellow
+setwidth 10
+circle 5
+
+setcolor red
+circle 15
+
+setcolor blue
+circle 25
+
+setcolor black
+circle 35
+
+setwidth 1
+circle 55
+
+ht

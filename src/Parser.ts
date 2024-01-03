@@ -9,7 +9,7 @@ export function parseToCanvas(turtle: Turtle, text: string): string {
 }
 
 export function removeComments(text: string): string {
-    return text.replace(/(<#.*?#>)|#.*/g, "$1");
+    return text.replace(/;(.*)$/g, "");
 }
 
 /** Returns color value from any string or number */

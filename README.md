@@ -4,30 +4,24 @@ VsTurtle is a simple extension for VS Code to write Logo Turtle commands.
 
 ## Supported Commands
 
-| Command | Short | Description |
-| ---     | ---   |  ---        |
-| Home    |       |             |
-| Forward | fd| Move turtle forward
-| Left | lt|  Turn left
-| Right | rt| Turn right
-| setheading | seth| Set turtle direction
-| back | bk|  Move turtle back
-| setx, sety, setxy | |  Set turtle position
+| Command  | Short  | Description | Example |
+| ---      | ---    |  ---        |  ---    |
+| Home     |        |             |
+| Forward  | fd     | Move turtle forward | forward 100
+| Left     | lt     |  Turn left          | left 90
+| Right    | rt     | Turn right           | right 90
+| setheading | seth | Set turtle direction | setheading 45
+| back       | bk   |  Move turtle back    | back 100
+| setx, sety, setxy | |  Set turtle position | set xy 10 20
 | clean, clearscreen | cs| Clear screen and return to home
-| penup | pu| Pen up - turtle will not draw when moving
-| pendown | pd| Pen down - turtle will draw when moving
-| setcolor, setpencolor | | See below
-| setwidth, setpensize
-| showturtle | st |
-| hideturtle | ht |
-
-
-# Extension Commands
-Some additional commands are supported which are not part of the original Logo turtle language
-
-| Command | Short | Description |
-| ---     | ---   |  ---        |
-| # Comment |       |          Any line that starts with a hash symbol (#) is treated as comment and ignored   |
+| penup     | pu    | Pen up - turtle will not draw when moving
+| pendown   | pd    | Pen down - turtle will draw when moving
+| setcolor, setpencolor | | See below | setcolor green
+| setwidth, setpensize | | | set width 3
+| circle     |      | Draw a circle |   circle 10
+| showturtle | st   |
+| hideturtle | ht   |
+| ;          |      | Comment  Any line that starts with ; is treated as comment and ignored 
 
 ## Colors
 

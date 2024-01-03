@@ -15,6 +15,11 @@ const forward = (length: number, turtle: Turtle): string => {
     return moveTo(newX, newY, turtle);
 };
 
+const stroke = (): string => {
+    return `ctx.stroke();
+ctx.beginPath();`;
+};
+
 /** Implements a turtle and sends back ctx 2d drawing commands */
 export const CanvasTurtle: TurtleCommands = {
     home: function (turtle: Turtle): string {
@@ -53,15 +58,12 @@ export const CanvasTurtle: TurtleCommands = {
     },
     setpencolor: function (color: string, turtle: Turtle): string | void {
         turtle.color = getColor(color);
-        return `ctx.stroke();
-ctx.beginPath();
-ctx.moveTo(${x(turtle.position)}, ${y(turtle.position)});
+        return `${stroke()}
 ctx.strokeStyle = "${turtle.color}";`;
     },
     setpensize: function (size: number, turtle: Turtle): string | void {
-        return `ctx.stroke();
-ctx.beginPath();
-ctx.moveTo(${x(turtle.position)}, ${y(turtle.position)});
+        turtle.penSize = size;
+        return `${stroke()}
 ctx.lineWidth = ${size};`;
     },
     showturtle: function (turtle: Turtle): string | void {
@@ -69,5 +71,12 @@ ctx.lineWidth = ${size};`;
     },
     hideturtle: function (turtle: Turtle): string | void {
         turtle.hideTurtle = true;
+    },
+    circle: function (size: number, turtle: Turtle): string | void {
+        if (turtle.penUp) {
+            return "";
+        }
+        return `${stroke()}
+ctx.arc(${x(turtle.position)}, ${y(turtle.position)}, ${size}, 0, 2 * Math.PI);`;
     },
 };
