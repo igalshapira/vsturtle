@@ -7,7 +7,7 @@ suite("Parser Test Suite", () => {
 
     test("removeComments", () => {
         const texts: [string, string][] = [
-            ["text # comment", "text "]
+            ["text ; comment", "text "]
         ];
         texts.forEach(([before, after]: [string, string]) => {
             assert.strictEqual(removeComments(before), after);
