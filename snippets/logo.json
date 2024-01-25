@@ -1,0 +1,7 @@
+{
+    "Repeat": {
+      "prefix": ["repeat"],
+      "body": ["repeat ${1:times} [ $0 ]"],
+      "description": "Repeat loop"
+    }
+  }

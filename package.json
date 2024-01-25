@@ -40,6 +40,12 @@
                 "path": "./syntaxes/logo.tmlanguage.json"
             }
         ],
+        "snippets": [
+            {
+                "language": "logo",
+                "path": "./snippets/logo.json"
+            }
+        ],
         "menus": {
             "editor/title": [
                 {
