@@ -61,6 +61,7 @@
         "package": "pnpm vsce package --no-dependencies",
         "publish": "pnpm vsce publish --no-dependencies",
         "vscode:prepublish": "pnpm run compile",
+        "antlr": "antlr4ts -o src/parser -visitor src/parser/Logo.g4",
         "compile": "tsc -p ./",
         "watch": "tsc -watch -p ./",
         "pretest": "pnpm run compile && pnpm run lint",
@@ -68,6 +69,7 @@
         "test": "vscode-test"
     },
     "devDependencies": {
+        "@types/antlr4": "^4.11.6",
         "@types/mocha": "^10.0.6",
         "@types/node": "18.x",
         "@types/vscode": "^1.85.0",
@@ -76,6 +78,7 @@
         "@vscode/test-cli": "^0.0.4",
         "@vscode/test-electron": "^2.3.8",
         "@vscode/vsce": "^2.22.0",
+        "antlr4ts-cli": "0.5.0-alpha.4",
         "eslint": "^8.56.0",
         "typescript": "^5.3.3"
     },
@@ -83,5 +86,9 @@
     "repository": {
         "type": "git",
         "url": "https://github.com/igalshapira/vsturtle.git"
+    },
+    "dependencies": {
+        "antlr4": "4.13.1-patch-1",
+        "antlr4ts": "0.5.0-alpha.4"
     }
 }

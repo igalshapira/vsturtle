@@ -1,11 +1,21 @@
-import { CanvasTurtle } from "./Canvas";
-import { Step, parseLogoCode } from "./Parser.en";
+import { LogoCanvasVisitor } from "./Canvas";
+// import { Step, parseLogoCode } from "./Parser.en";
 import { Turtle } from "./vsturtle.types";
+import { ANTLRInputStream, CommonTokenStream } from "antlr4ts";
+const LogoLexer = require("./parser/LogoLexer").LogoLexer;
+const LogoParser = require("./parser/LogoParser").LogoParser;
 
-export function parseToCanvas(turtle: Turtle, text: string): string {
-    const steps: Step[] = parseLogoCode(text, CanvasTurtle);
+export function parseToCanvas(turtle: Turtle, input: string): string {
+    const chars = new ANTLRInputStream(`home ${input}`);
+    const lexer = new LogoLexer(chars);
+    const tokens = new CommonTokenStream(lexer);
+    const parser = new LogoParser(tokens);
 
-    return steps.map((step: Step) => step(turtle)).join("\n");
+    const tree = parser.prog();
+    const visitor = new LogoCanvasVisitor(turtle);
+    const canvas = visitor.visit(tree);
+
+    return canvas;
 }
 
 export function removeComments(text: string): string {
@@ -13,7 +23,7 @@ export function removeComments(text: string): string {
 }
 
 /** Returns color value from any string or number */
-export function getColor(color:  string): string {
+export function getColor(color: string): string {
     if (isNaN(parseInt(color))) {
         return color;
     }
